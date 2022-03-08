@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Heading from "ant/Heading"
 import { Table, PlusButton, Button, Checkbox } from "ant"
 import theme from "styles/Theme"
@@ -14,7 +14,7 @@ import styled from 'styled-components';
 import { ReactComponent as MapIcon } from "assets/icons/Pin.svg"
 import { ReactComponent as PhoneIcon } from "assets/icons/Phone/Phone.svg"
 import { Row, Col, Modal } from "antd"
-
+import axios from "axios"
 export default function ProductView({
     setActiveComp,
     products,
@@ -23,76 +23,44 @@ export default function ProductView({
 }) {
   usePage("Operations")
     const Edit = () => {
-        // if (component === "operations") {
-        //     // setComponent("editStatus")
-        // } else {
-        //     // setComponent("operations")
-        // }
+      
     }
+    const [Operations, setOperations] = useState({});
 
+  useEffect(() => {
+    async function getOperations() {
+      const getOperation = await axios.post(`http://localhost:8080/api/operations`, { vendorId: localStorage.getItem('uid') });
+      if (getOperation) {
+        console.log(getOperation.data.data)
+        setOperations(getOperation.data.data);
+      }
+    }
+    getOperations();
+  }, []);
     
   return (
     <Container>
       <div>
-        <TopBar
-          activeItem={active}
-          heading='5 AUG 2022'
-        />
-        <FiltersBar
-        // title={'Product Name'}
-        // category={'Shoe'}
-        //   onSearchChange={e => handleSearch(e.target.value)}
-        //   filters={{
-        //     defaultValue: "All",
-        //     onChange: f => console.log(f),
-        //     filters: ["New", "Old"],
-        //   }}
-        //   sortBy={{
-        //     defaultValue: "All",
-        //     onChange: f => handleFilter(f),
-        //     filters: ["All", "New", "Old"],
-        //   }}
-          
-        //   otherFilters={
-        //     <>
-        //       <Button
-        //         type='secondary'
-        //         onClick={() => setActiveComp("wishlisted")}
-        //         style={{
-        //           height: "54px",
-        //           display: "inline-flex",
-        //           transform: "translateY(-1px)",
-        //         }}
-        //         // icon={<HeartIcon style={{ marginRight: "6px" }} />}
-        //         >
-        //         Make Discount 
-        //       </Button>
-        //       {/* <PlusButton
-        //         style={{ display: "inline-flex" }}
-        //         onClick={() => setActiveComp("upload")}
-        //       /> */}
-        //     </>
-        //   }
-        />
+        <br />
         <div className="d-flex justify-content-between">
             <div >
                 <Text1>
                     <MapIcon />
-                    &nbsp;123 Delux Apartment, Doha , Qatar
+                  &nbsp;{Operations.address}
                 </Text1>
                 <TextSuccess>
-                    &nbsp;https://googlemaps.com/loremipsum
+                    &nbsp;{Operations.googleMapLocation}
                 </TextSuccess>
                 <div className="d-flex pt-4">
                 <Text1>
                     <PhoneIcon />
-                    &nbsp;+974 123456789
+                    &nbsp;{Operations.phoneNumber}
                 </Text1>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <Text1>
                     <PhoneIcon />
                     &nbsp;+974 123456789
-                </Text1>
+                </Text1> */}
                 </div>
             </div>
             <div className="d-flex align-items-center">
