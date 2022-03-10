@@ -85,7 +85,7 @@ export default function Dashboard() {
                                 <Graph>
                                     <Content>
                                         {" "}
-                                        <Head>Outstanding Revenue</Head>
+                                        <Head>Outstanding Revenue </Head>
                                         <Price>QAR 405</Price>
                                         <IconWrapper>
                                             <ColorSvg color='assetTeal'>

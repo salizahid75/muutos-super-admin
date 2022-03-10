@@ -10,22 +10,16 @@ export default function Users() {
   const [staffs, setStaffs] = useState([])
   const [isLoading, setLoading] = useState(true)
   const [active, setActive] = useState("all")
-
   const onEdit = (id) => {
     console.log(id)
   }
-
   useEffect(() => {
     const makeCall = async () => {
       async function getAllUser(){
-
         const users = await axios.get(`http://localhost:8080/api/users`);
-      
         var data = users.data.data;
-      
         setStaffs(data);
-      }
-      
+      }      
       getAllUser();
       setLoading(false);
     }
