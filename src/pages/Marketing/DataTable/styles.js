@@ -23,7 +23,7 @@ export const ItemsFlex = styled.div`
     justify-content: space-between;
 
     & > * {
-        width: 50%;
+        width: 100%;
 
         &:first-child {
             margin-right: 20px;

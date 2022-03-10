@@ -179,7 +179,9 @@ export default function UploadProducts({
     for (const image of images) {
       formData.append("image", image.file)
     }
-
+    formData.append("isFeatured", product.isFeatured)
+    formData.append("featuredLocation", product.featuredLocation)
+    formData.append("isApproved", product.isApproved)
     setButtonLoading(true)
 
     if (isEdit) {

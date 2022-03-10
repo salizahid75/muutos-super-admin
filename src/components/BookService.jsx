@@ -3,16 +3,16 @@ import { ReactComponent as PlusIcon } from "assets/icons/Plus/Plus.svg"
 import ColorSvg from "ant/ColorSvg"
 import { Button } from "ant"
 import axios from 'axios'
-export default function BookProduct(props) {
+export default function BookService(props) {
 
-    const makeFeatured = async (productId) => {
+    const makeFeatured = async (serviceId) => {
        const data = {
            isFeatured:1,
-           featuredProductId:productId,
-           featuredProductLocation:'Home',
+           featuredServiceId:serviceId,
+           featuredServiceLocation:'Home',
        } 
 
-       const res = await axios.post('http://localhost:8080/api/addToFeaturedProducts', data);
+       const res = await axios.post('http://localhost:8080/api/addToFeaturedServices', data);
        if(res){
            window.location.reload();
        }

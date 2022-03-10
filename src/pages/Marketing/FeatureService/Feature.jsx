@@ -16,11 +16,11 @@ import "react-modern-calendar-datepicker/lib/DatePicker.css"
 import Heading from "ant/Heading"
 import MarketingCalendar from "./Calendar"
 import PlusButton from "../../../ant/PlusButton"
-import BookProduct from "../../../components/BookProduct"
+import BookService from "../../../components/BookService"
 import axios from "axios"
 
 const { Option } = Select
-export default function Feature({ setActiveComp }) {
+export default function FeatureServices({ setActiveComp }) {
     const [selectedDay, setSelectedDay] = useState(null)
 
 
@@ -29,21 +29,21 @@ export default function Feature({ setActiveComp }) {
     const handleChange = async (event) => {
 
         const value = event.target.value;
-        const res = await axios.get('http://localhost:8080/api/products?search='+value);
+        const res = await axios.get('http://localhost:8080/api/allServices?search='+value);
         if(res){
             setProducts(res.data.data);
         }
 
     }
 
-    usePage("Feature Product")
+    usePage("Feature Service")
     return (
         <Container>
             <div>
                 <TopBar
                     breadcrumb={{
                         Marketing: () => setActiveComp("marketing"),
-                        "Feature Product": () => {},
+                        "Feature Service": () => {},
                     }}
                 />
 
@@ -111,15 +111,15 @@ export default function Feature({ setActiveComp }) {
                     </Col>
                     <Col style={{ marginLeft: "20px" }}>
                         <FiltersBar
-                            placeHolder='Search Product For Feature'
+                            placeHolder='Search Service For Feature'
                             Width='536px'
                             onSearchChange={handleChange}
                         />
-                        <input type="hidden" id="featuredProductId" />
+            
                         {products?products.map(function(p){
                             return (
                                 <>
-                                    <BookProduct onClick={()=>document.getElementById('featuredProductId').value = p.id} id={p.id} image={p.images?p.images[0]:''} name={p.name?p.name:''} price={p.price?p.price:''}/>
+                                    <BookService id={p.id} image={p.images?p.images[0]:''} name={p.name?p.name:''} price={p.price?p.price:''}/>
                                 </>
                             )
                         }):'null'}

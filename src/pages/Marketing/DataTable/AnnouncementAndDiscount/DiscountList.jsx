@@ -150,6 +150,15 @@ export default function DiscountList() {
                                         marginTop: "22px",
                                         cursor: "pointer",
                                     }}
+                                    onClick={()=>{
+                                        async function deleteDiscountById(){
+                                            const res = await axios.post('http://localhost:8080/api/deleteDiscountById', {id: value.id});
+                                            if(res){
+                                                window.location.reload();
+                                            }
+                                        }
+                                        deleteDiscountById();
+                                    }}
                                 />
                             </ColorSvg>
                         </SubFlex>
@@ -297,7 +306,7 @@ export default function DiscountList() {
                                             flexDirection: "row",
                                             alignItems: "center",
                                         }}>
-                                        <ColorSvg color={value.products.includes('Gym')?'primary':'gray700'}>
+                                        <ColorSvg color={value.services.includes('Gym')?'primary':'gray700'}>
                                             <CheckMarkIcon
                                                 style={{
                                                     marginBottom: "5px",
@@ -322,7 +331,7 @@ export default function DiscountList() {
                                             flexDirection: "row",
                                             alignItems: "center",
                                         }}>
-                                        <ColorSvg color={value.products.includes('Spa & Saloon')?'primary':'gray700'}>
+                                        <ColorSvg color={value.services.includes('Spa & Saloon')?'primary':'gray700'}>
                                             <CheckMarkIcon
                                                 style={{
                                                     marginBottom: "5px",
@@ -347,7 +356,7 @@ export default function DiscountList() {
                                             flexDirection: "row",
                                             alignItems: "center",
                                         }}>
-                                        <ColorSvg color={value.products.includes('Dental')?'primary':'gray700'}>
+                                        <ColorSvg color={value.services.includes('Dental')?'primary':'gray700'}>
                                             <CheckMarkIcon
                                                 style={{
                                                     marginBottom: "5px",
@@ -372,7 +381,7 @@ export default function DiscountList() {
                                             flexDirection: "row",
                                             alignItems: "center",
                                         }}>
-                                        <ColorSvg color={value.products.includes('Recreation')?'primary':'gray700'}>
+                                        <ColorSvg color={value.services.includes('Recreation')?'primary':'gray700'}>
                                             <CheckMarkIcon
                                                 style={{
                                                     marginBottom: "5px",

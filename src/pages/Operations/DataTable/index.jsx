@@ -21,6 +21,7 @@ export default function ProductView({
     onStatusChange,
     active,
 }) {
+  console.log(data)
   usePage("Operations")
     const Edit = () => {
       
@@ -31,7 +32,6 @@ export default function ProductView({
     async function getOperations() {
       const getOperation = await axios.post(`http://localhost:8080/api/operations`, { vendorId: localStorage.getItem('uid') });
       if (getOperation) {
-        console.log(getOperation.data.data)
         setOperations(getOperation.data.data);
       }
     }
@@ -68,9 +68,8 @@ export default function ProductView({
                     <p>
                         Operation Status: 
                     </p>
-                    <select name="" id="" className="p-1">
-                        <option value="">Opened</option>
-                        <option value="">Closed</option>
+                    <select className="p-1">
+                        <option selected value={data[0].operationStatus}>{data[0].operationStatus}</option>
                     </select>
                 </ButtonWrapper>
                 &nbsp;

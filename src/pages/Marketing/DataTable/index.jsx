@@ -26,6 +26,7 @@ export default function DT({ setActiveComp }) {
     usePage("Marketing")
     const [hide, setHide] = useState(false)
     const [showAnnouncememt, setShowAnnouncememt] = useState(false)
+    console.log(productsData);
     return (
         <Container>
             <div>
@@ -33,6 +34,7 @@ export default function DT({ setActiveComp }) {
                 <FiltersBar
                     onSearchChange={s => console.log(s)}
                     otherFilters={
+                        <>
                         <Button
                             type='secondary'
                             onClick={() => setActiveComp("feature")}
@@ -53,6 +55,27 @@ export default function DT({ setActiveComp }) {
                             }>
                             Feature Product
                         </Button>
+                        <Button
+                        type='secondary'
+                        onClick={() => setActiveComp("featureServices")}
+                        style={{
+                            height: "54px",
+                            display: "inline-flex",
+                            transform: "translateY(4px)",
+                        }}
+                        icon={
+                            <ColorSvg color='primary'>
+                                <StarIcon
+                                    style={{
+                                        marginRight: "6px",
+                                        transform: "translateY(2px)",
+                                    }}
+                                />
+                            </ColorSvg>
+                        }>
+                        Feature Services
+                    </Button>
+                    </>
                     }
                 />
 
@@ -103,7 +126,7 @@ export default function DT({ setActiveComp }) {
                         Featured Products
                     </Heading>
                     <ItemsFlex>
-                        {/* <Table
+                        <Table
                             pagination={{
                                 pageSize:
                                     productsData.slice(
@@ -117,8 +140,8 @@ export default function DT({ setActiveComp }) {
                                 0,
                                 Math.ceil(productsData.length / 2)
                             )}
-                        /> */}
-                        {productsData.length > 2 ? (
+                        />
+                        {/* {productsData.length >= 1 ? (
                             <Table
                                 pagination={{
                                     pageSize:
@@ -134,7 +157,7 @@ export default function DT({ setActiveComp }) {
                             />
                         ) : (
                             <div></div>
-                        )}
+                        )} */}
                     </ItemsFlex>
                 </Block>
                 <Block>
@@ -157,7 +180,7 @@ export default function DT({ setActiveComp }) {
                                 Math.ceil(servicesData.length / 2)
                             )}
                         />
-                        {servicesData.length > 2 ? (
+                        {/* {servicesData.length > 2 ? (
                             <Table
                                 pagination={{
                                     pageSize:
@@ -173,7 +196,7 @@ export default function DT({ setActiveComp }) {
                             />
                         ) : (
                             <div></div>
-                        )}
+                        )} */}
                     </ItemsFlex>
                 </Block>
             </div>

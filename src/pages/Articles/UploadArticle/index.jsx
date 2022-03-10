@@ -15,16 +15,17 @@ import { ReactComponent as DownArrowIcon } from "assets/icons/Arrow/Chevron/Down
 import theme from "styles/Theme"
 import UploadImages from "components/UploadImages"
 import MarkDownEditor from "components/MarkDownEditor"
+import axios from "axios"
 const { Option } = Select
 
-export default function UploadProducts({ setActiveComp }) {
+export default function UploadProducts({ isEdit = false,  article = null, setActiveComp }) {
     const [title, setTitle] = useState("")
     const [value, setValue] = useState(null)
     const [subTitle, setSubTitle] = useState("")
     const [errors, setErrors] = useState([])
     const [images, setImages] = useState([])
     const [category, setCategory] = useState(categories[0])
-    const onSubmit = () => {
+    const onSubmit = async () => {
         setErrors([])
 
         const inputErrors = []
@@ -36,6 +37,22 @@ export default function UploadProducts({ setActiveComp }) {
             window.scrollTo(0, 0)
 
             return
+        }
+
+        var formData = new FormData();
+        images.forEach((element)=>{
+            console.log(element.file);
+            formData.append('files', element.file);
+        })
+        formData.append('title', title)
+        formData.append('description', value)
+        formData.append('subtitle', subTitle)
+        formData.append('category', category)
+        formData.append('vendorId', localStorage.getItem('uid'));
+        const uploadArticleImages = await axios.post(`http://localhost:8080/api/article`, formData);
+
+        if(uploadArticleImages){
+            window.location.reload();
         }
     }
     usePage("Add Article")

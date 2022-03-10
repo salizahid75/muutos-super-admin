@@ -1,45 +1,31 @@
 import styled from "styled-components"
 import { ColorSvg } from "ant"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { ReactComponent as FlagIcon } from "assets/icons/Flag.svg"
 import { ReactComponent as DownIcon } from "assets/icons/Chevron/DownArrow.svg"
 import { ReactComponent as EditIcon } from "assets/icons/Edit/Edit_1.svg"
 import { ReactComponent as DeleteIcon } from "assets/icons/Trash/Trash_2.svg"
-
+import axios from "axios"
 export default function AnnouncementList() {
+
+
     const [hide, setHide] = useState(false)
-    const data = [
-        {
-            name: "Holiday New Products",
-            date: "16 Aug 2021",
-            announced:
-                "  Risus faucibus fames et mollis sit. Aliquam nascetur quis sed blandit quis. Auctor vitae in molestie in. Semper sed nunc eget id pharetra. Leo id orci enim ullamcorper. Elit turpis platea diam quis quisque dui. Molestie tortor vitae dui faucibus viverra viverra consectetur egestas. Tristique lacus ut et hendrerit arcu congue urna, sollicitudin tortor.",
-        },
-        {
-            name: "Holiday New Products",
-            date: "16 Aug 2021",
-            announced:
-                "  Risus faucibus fames et mollis sit. Aliquam nascetur quis sed blandit quis. Auctor vitae in molestie in. Semper sed nunc eget id pharetra. Leo id orci enim ullamcorper. Elit turpis platea diam quis quisque dui. Molestie tortor vitae dui faucibus viverra viverra consectetur egestas. Tristique lacus ut et hendrerit arcu congue urna, sollicitudin tortor.",
-        },
-        {
-            name: "Holiday New Products",
-            date: "16 Aug 2021",
-            announced:
-                "  Risus faucibus fames et mollis sit. Aliquam nascetur quis sed blandit quis. Auctor vitae in molestie in. Semper sed nunc eget id pharetra. Leo id orci enim ullamcorper. Elit turpis platea diam quis quisque dui. Molestie tortor vitae dui faucibus viverra viverra consectetur egestas. Tristique lacus ut et hendrerit arcu congue urna, sollicitudin tortor.",
-        },
-        {
-            name: "Holiday New Products",
-            date: "16 Aug 2021",
-            announced:
-                "  Risus faucibus fames et mollis sit. Aliquam nascetur quis sed blandit quis. Auctor vitae in molestie in. Semper sed nunc eget id pharetra. Leo id orci enim ullamcorper. Elit turpis platea diam quis quisque dui. Molestie tortor vitae dui faucibus viverra viverra consectetur egestas. Tristique lacus ut et hendrerit arcu congue urna, sollicitudin tortor.",
-        },
-        {
-            name: "Holiday New Products",
-            date: "16 Aug 2021",
-            announced:
-                "  Risus faucibus fames et mollis sit. Aliquam nascetur quis sed blandit quis. Auctor vitae in molestie in. Semper sed nunc eget id pharetra. Leo id orci enim ullamcorper. Elit turpis platea diam quis quisque dui. Molestie tortor vitae dui faucibus viverra viverra consectetur egestas. Tristique lacus ut et hendrerit arcu congue urna, sollicitudin tortor.",
-        },
-    ]
+
+    const [data, setData] = useState([]);
+    const [today, setToday] = useState();
+    useEffect(() => {
+        async function getAnnouncements(){
+            const res = await axios.post('http://localhost:8080/api/getAllAnnouncementsByVendor', {vendorId: localStorage.getItem('uid')});
+            if(res){
+                setData(res.data.data);
+                const tody  = new Date();
+                // const to =  tody.getDate()+'-'+(tody.getMonth()+1)+'-'+tody.getFullYear();
+                console.log(res.data.data)
+                setToday(tody)
+            }
+        }
+        getAnnouncements();
+    }, []);
     return (
         <>
             {data.map((value, index) => (
@@ -53,8 +39,8 @@ export default function AnnouncementList() {
                                 </ColorSvg>
                             </Flag>
                             <Content>
-                                <h1>{value.name}</h1>
-                                <p>{value.date}</p>
+                                <h1>{value.title}</h1>
+                                {/* <p>{Math.ceil(Math.abs(new Date(value.addedOn) - today) / (1000 * 60 * 60 * 24))}</p> */}
                             </Content>
                         </SubFlex>
                         <SubFlex style={{ justifyContent: "flex-end" }}>
@@ -74,7 +60,7 @@ export default function AnnouncementList() {
                                     }}
                                 />
                             </ColorSvg>
-                            <ColorSvg color='gray100'>
+                            {/* <ColorSvg color='gray100'>
                                 <EditIcon
                                     style={{
                                         marginLeft: "34px",
@@ -82,7 +68,7 @@ export default function AnnouncementList() {
                                         cursor: "pointer",
                                     }}
                                 />
-                            </ColorSvg>
+                            </ColorSvg> */}
                             <ColorSvg color='gray100'>
                                 <DeleteIcon
                                     style={{
@@ -90,13 +76,22 @@ export default function AnnouncementList() {
                                         marginTop: "22px",
                                         cursor: "pointer",
                                     }}
+                                    onClick={()=>{
+                                        async function deleteAnnouncements(){
+                                            const res = await axios.post('http://localhost:8080/api/deleteAnnouncementById', {id: value.id});
+                                            if(res){
+                                                window.location.reload();
+                                            }
+                                        }
+                                        deleteAnnouncements();
+                                    }}
                                 />
                             </ColorSvg>
                         </SubFlex>
                     </Wrapper>
                     <Wrapper>
                         {hide === index ? (
-                            <Announcement>{value.announced}</Announcement>
+                            <Announcement>{value.description}</Announcement>
                         ) : null}
                     </Wrapper>
                 </MainWrapper>

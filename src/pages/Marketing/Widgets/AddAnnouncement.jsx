@@ -12,6 +12,7 @@ import Heading from "ant/Heading"
 import { ReactComponent as Cross } from "assets/icons/Close/Close-1.svg"
 import "react-circular-progressbar/dist/styles.css"
 import { TextArea } from "../../../ant/Input"
+import axios from "axios"
 
 export default function AddAnnoucement({ onHide = null }) {
     return (
@@ -23,7 +24,8 @@ export default function AddAnnoucement({ onHide = null }) {
             <Wrapper2>
                 <Input
                     type='text'
-                    placeHolder={"Title"}
+                    placeholder={"Title"}
+                    id="title"
                     style={{
                         border: "1px solid #3F3F46",
                         borderRadius: "12px",
@@ -33,7 +35,8 @@ export default function AddAnnoucement({ onHide = null }) {
                 />
 
                 <TextArea
-                    placeHolder={"Maximum 400 Word Count Limit"}
+                    id="description"
+                    placeholder={"Maximum 400 Word Count Limit"}
                     style={{
                         border: "1px solid #3F3F46",
                         borderRadius: "12px",
@@ -44,7 +47,24 @@ export default function AddAnnoucement({ onHide = null }) {
                 />
 
                 <Row style={{ maxWidth: "1092px" }}>
-                    <Button type='primary'>Add Announcement</Button>
+                    <Button type='primary'
+                        onClick={()=>{
+                            var title = document.getElementById('title').value;
+                            var description = document.getElementById('description').value;
+                            var data = {
+                                vendorId:localStorage.getItem('uid'),
+                                title:title,
+                                description:description
+                            }
+                            async function addAnnouncement(){
+                                const createAnnouncement = await axios.post(`http://localhost:8080/api/announcement`, data);
+                                if(createAnnouncement){
+                                    window.location.reload()
+                                }
+                            }
+                            addAnnouncement();
+                        }}
+                    >Add Announcement</Button>
                     <Col span={12}></Col>
                 </Row>
             </Wrapper2>
