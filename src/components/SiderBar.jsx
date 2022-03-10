@@ -56,6 +56,28 @@ if(userRole=='admin'){
             icon: <CubeIcon />,
             link: "/categories",
         },
+        {
+            title: "About Us",
+            icon: <CubeIcon />,
+            link: "/about-us",
+        },
+        {
+            title: "Careers",
+            icon: <CubeIcon />,
+            link: "/Careers",
+        },
+        {
+            title: "World",
+            icon: <CubeIcon />,
+            link: "/World",
+        },
+        {
+            title: "Legal Pages",
+            icon: <CubeIcon />,
+            link: "/Legal_Pages",
+        }
+        
+      
     ]
 
 }else if(userRole=='vendor'){
@@ -106,6 +128,7 @@ if(userRole=='admin'){
             icon: <ActivityIcon />,
             link: "/finance",
         },
+        
     ]
 
 }

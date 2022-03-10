@@ -24,6 +24,14 @@ import Services from "pages/Services"
 import Articles from "pages/Articles"
 import Staff from "pages/Staff"
 import Finance from "pages/Finance"
+import AboutUs from "pages/Cms/AboutsUs"
+import Careers from "pages/Cms/Careers"
+import World from "pages/Cms/World"
+
+import LegalPages from "pages/Cms/LegalPages"
+
+
+
 import Categories from "pages/Categories"
 import { ReactComponent as ProfilePicIcon } from "assets/icons/ProfilePic.svg"
 import { ReactComponent as CloseIcon } from "assets/icons/Close/Close-1.svg"
@@ -31,6 +39,7 @@ import Reviews from 'pages/Reviews';
 import Subscriptions from 'pages/Subscriptions'
 import Users from 'pages/Users';
 const userRole = localStorage.getItem('muutos-u-role');
+
 function App() {
   return (
     <>
@@ -106,7 +115,11 @@ function App() {
             "/reviews",
             "/categories",
             "/subscriptions",
-            "/users"
+            "/users",
+            "/about-us",
+            "/careers",
+            "/world",
+            "/legal_pages"
           ]}>
           <Layout>
             <CustomSwitch>
@@ -149,6 +162,21 @@ function App() {
               <Route exact path='/finance'>
                 <Finance />
               </Route>
+              <Route exact path='/about-us'>
+                <AboutUs />
+              </Route>
+
+              <Route exact path='/careers'>
+                <Careers />
+              </Route>
+              <Route exact path='/world'>
+                <World />
+              </Route>
+
+              <Route exact path='/legal_pages'>
+                <LegalPages />
+              </Route>
+             
             </CustomSwitch>
           </Layout>
         </Route>
