@@ -20,6 +20,7 @@ import { CallPostService } from "api/services";
 import { ReactComponent as PlusIcon } from "assets/icons/PlusMuutos.svg";
 import { Form } from "react-bootstrap";
 import "./style.css";
+import axios from "axios";
 const { Option } = Select;
 
 export default function Upload({
@@ -30,225 +31,102 @@ export default function Upload({
   usePage("Add Legal Pages Content");
   const userRole = localStorage.getItem("muutos-u-role");
   const [UserRole, setUserRole] = useState("");
+  const [Content, setContent] = useState([]);
   useEffect(() => {
     if (userRole == "admin") {
       setUserRole("admin");
     }
+    async function getContent() {
+      const content = await axios.get(`http://localhost:8080/api/getLegalContent`)
+      if(content){
+        setContent(content.data.data); 
+        console.log(content.data.data)  
+      } 
+    }
+    getContent()
   }, []);
-  const [component, setComponent] = useState(0);
-  const [pickerVisible, setPickerVisible] = useState(false);
-  const [colors, setColors] = useState([]);
-  const [isButtonLoading, setButtonLoading] = useState(false);
-  const [errors, setErrors] = useState([]);
 
-  const formHandler = (e) => {
-    e.preventDefault();
-  };
-
-  const [serviceImages, setServiceImages] = useState(
-    isEdit && Array.isArray(service?.images)
-      ? service?.images?.map((i) => ({
-          file: i,
-        }))
-      : []
-  );
-  const [trainerImages, setTrainerImages] = useState(
-    isEdit && Array.isArray(service?.specialistImages)
-      ? service?.specialistImages?.map((i) => ({
-          file: i,
-        }))
-      : []
-  );
-
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
-
-  const onPickerDone = (color) => {
-    if (color) {
-      setColors([...colors, color]);
-    }
-
-    setPickerVisible(false);
-  };
-  const { set, get } = useServicesController({
-    data: {},
-    defaultData: service,
-  });
-
-  const onSubmit = async () => {
-    setErrors([]);
-
-    const data = get.data();
-    var inputFields;
-    const userRole = localStorage.getItem("muutos-u-role");
-    if (userRole == "admin") {
-      inputFields = [
-        "userEmail",
-        "name",
-        "address",
-        "staffWorkers",
-        "userCapacity",
-        "specialists",
-        "spot",
-        "code",
-        "schedule",
-        "price",
-      ];
-    } else {
-      inputFields = [
-        "name",
-        "address",
-        "staffWorkers",
-        "userCapacity",
-        "specialists",
-        "spot",
-        "code",
-        "schedule",
-        "price",
-      ];
-    }
-    const inputEmptyFields = inputFields.filter(
-      (f) => !data[f] || !data[f].trim()
-    );
-    const inputErrors = [];
-
-    if (inputEmptyFields.length) {
-      inputErrors.push(
-        `${inputEmptyFields
-          .map((f) => f[0].toUpperCase() + f.slice(1))
-          .join(", ")} cannot be Empty`
-      );
-    }
-    if (data.audiences.length < 1) {
-      inputErrors.push("please select at least one audiences");
-    }
-    if (data.workingHours.length < 1) {
-      inputErrors.push("please select at least one Working Hour");
-    }
-    if (data.facilities.length < 1) {
-      inputErrors.push("please select at least one Facility");
-    }
-    if (data.memberships.length < 1 && component % 2 === 0) {
-      inputErrors.push("please select at least one MemberShip");
-    }
-    if (data.servicesOffered.length < 1 && component % 2 === 1) {
-      inputErrors.push("please select at least one Service");
-    }
-    if (inputErrors.length) {
-      setErrors(inputErrors);
-      window.scrollTo(0, 0);
-      return;
-    }
-    setButtonLoading(true);
-
-    let formData = new FormData();
-
-    for (const prop in data) {
-      formData.append(prop, data[prop]);
-    }
-
-    const res = await CallPostService(formData);
-    if (res.status === "active") {
-      setActiveComp("products");
-    } else {
-      setErrors([res.data]);
-    }
-    setButtonLoading(false);
-  };
 
   return (
     <>
-      <ColorPicker onDone={onPickerDone} visible={pickerVisible} />
       <Container>
         <div>
           <TopBar
             breadcrumb={{
-              Services: () => setActiveComp("services"),
-              "Upload Service": () => {},
+              CMS: () => setActiveComp("upload"),
+              "Legal": () => { },
             }}
           />
-          <Form onClick={formHandler}>
-            <h2 className="text-white">To the world Section</h2>
+          <Form>
+            <Form.Group
+              className="mb-3"
+              controlId="exampleForm.ControlTextarea2"
+            >
+              <Form.Label className="text-white">Terms & Condition</Form.Label>
+              <Form.Control defaultValue={Content.termsAndCondition} name="termsAndCondition" className="theme-styling" as="textarea" rows={5} />
+            </Form.Group>
+            <br />
 
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea2"
             >
-              <Form.Label className="text-white">Title</Form.Label>
-              <Form.Control className="theme-styling" type="text" />
+              <Form.Label className="text-white">Privacy Policy</Form.Label>
+              <Form.Control defaultValue={Content.privacyPolicy} name="privacyPolicy" className="theme-styling" as="textarea" rows={5} />
             </Form.Group>
+            <br />
 
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea2"
             >
-              <Form.Label className="text-white">Content</Form.Label>
-              <Form.Control className="theme-styling" as="textarea" rows={3} />
+              <Form.Label className="text-white">Cookie Policy</Form.Label>
+              <Form.Control defaultValue={Content.cookiePolicy} name="cookiePolicy" className="theme-styling" as="textarea" rows={5} />
             </Form.Group>
+            <br />
 
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea2"
             >
-              <Form.Label className="text-white">Select Page</Form.Label>
-              <Form.Select className="theme-styling" aria-label="Default select example">
-                <option  disabled>Select Page</option>
-                <option value="terms-of-user">Terms of Use</option>
-                <option value="Data-Protection">Data Protection</option>
-                <option value="Cookie-Policy">Cookie Policy</option>
-                <option value="Report-Incident">Report Incident</option>
-                
-            </Form.Select>
+              <Form.Label className="text-white">Data Protection</Form.Label>
+              <Form.Control defaultValue={Content.dataProtection} name="dataProtection" className="theme-styling" as="textarea" rows={5} />
             </Form.Group>
-           
+            <br />
 
-            <Button variant="primary">Submit</Button>
+            <Form.Group
+              className="mb-3"
+              controlId="exampleForm.ControlTextarea2"
+            >
+              <Form.Label className="text-white">Report Incident</Form.Label>
+              <Form.Control defaultValue={Content.reportIncident} name="reportIncident" className="theme-styling" as="textarea" rows={5} />
+            </Form.Group>
+            <br />
+            <Button type="primary"
+              onClick={()=>{
+                var privacyPolicy = document.getElementsByName('privacyPolicy')[0].value;
+                var cookiePolicy = document.getElementsByName('cookiePolicy')[0].value;
+                var dataProtection = document.getElementsByName('dataProtection')[0].value;
+                var reportIncident = document.getElementsByName('reportIncident')[0].value;
+                var termsAndCondition = document.getElementsByName('termsAndCondition')[0].value;
+
+                var data = {
+                  privacyPolicy:privacyPolicy,
+                  cookiePolicy:cookiePolicy,
+                  dataProtection:dataProtection,
+                  reportIncident:reportIncident,
+                  termsAndCondition:termsAndCondition,
+                }
+
+                const updateContent = axios.post(`http://localhost:8080/api/updateLegalContent`, data);
+                if (updateContent) {
+                  window.location.reload();
+                }
+              }}
+            >Submit</Button>
           </Form>
           <br></br>
         </div>
-        {() => {
-          if (UserRole !== "admin") {
-            return (
-              <div>
-                <Heading
-                  size="32px"
-                  style={{ marginTop: "10px", marginBottom: "37px" }}
-                >
-                  Notice Widgets
-                </Heading>
-                {errors.map((error, index) => (
-                  <Alert
-                    key={index}
-                    message={error}
-                    type="error"
-                    showIcon
-                    icon={
-                      <ColorSvg style={{ alignSelf: "start" }} color="assetRed">
-                        <AlertIcon
-                          style={{
-                            transform: "translateY(4px)",
-                            marginRight: "8px",
-                          }}
-                        />
-                      </ColorSvg>
-                    }
-                  />
-                ))}
-              </div>
-            );
-          }
-        }}
       </Container>
     </>
   );

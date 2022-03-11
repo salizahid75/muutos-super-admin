@@ -8,7 +8,7 @@ import { CallUpdateServiceById, GetAllServices, GetAllServicesByDate, CallUpdate
 import Wishlisted from "./Wishlisted"
 
 export default function Services() {
-    const [activeComp, setActiveComp] = useState("services")
+    const [activeComp, setActiveComp] = useState("upload")
     const [services, setServices] = useState([])
     const [isLoading, setLoading] = useState(true)
     const [active, setActive] = useState('all')
