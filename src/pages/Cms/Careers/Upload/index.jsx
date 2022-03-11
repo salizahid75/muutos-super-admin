@@ -19,6 +19,7 @@ import FiltersBar from "components/FiltersBar"
 import { CallPostService } from "api/services"
 import { ReactComponent as PlusIcon } from "assets/icons/PlusMuutos.svg"
 import { Form } from 'react-bootstrap';
+import axios from "axios"
 import "./style.css";
 const { Option } = Select
 
@@ -30,148 +31,35 @@ export default function Upload({
   usePage("Add Career Content")
   const userRole = localStorage.getItem('muutos-u-role');
   const [UserRole, setUserRole] = useState('');
+  const [Content, setContent] = useState([]);
   useEffect(() => {
     if (userRole == 'admin') {
       setUserRole('admin');
     }
+    async function getContent() {
+      const content = await axios.get(`http://localhost:8080/api/getCareerContent`)
+      if(content){
+        setContent(content.data.data); 
+        console.log(content.data.data)  
+      } 
+    }
+    getContent()
   }, []);
-  const [component, setComponent] = useState(0)
-  const [pickerVisible, setPickerVisible] = useState(false)
-  const [colors, setColors] = useState([])
-  const [isButtonLoading, setButtonLoading] = useState(false)
-  const [errors, setErrors] = useState([])
 
-  const formHandler=(e)=>{
+  const uploadCareerImage = async (e) => {
     e.preventDefault();
-    
-
-  }
-  
-  const [serviceImages, setServiceImages] = useState(
-    isEdit && Array.isArray(service?.images)
-      ? service?.images?.map(i => ({
-        file: i,
-      }))
-      : []
-  )
-  const [trainerImages, setTrainerImages] = useState(
-    isEdit && Array.isArray(service?.specialistImages)
-      ? service?.specialistImages?.map(i => ({
-        file: i,
-      }))
-      : []
-  )
-
-  const [isModalVisible, setIsModalVisible] = useState(false)
-
-  const showModal = () => {
-    setIsModalVisible(true)
-  }
-
-  const handleOk = () => {
-    setIsModalVisible(false)
-  }
-
-  const handleCancel = () => {
-    setIsModalVisible(false)
-  }
-
-  const onPickerDone = color => {
-    if (color) {
-      setColors([...colors, color])
+    console.log(e.target.files[0])
+    var formData = new FormData();
+    formData.append('file', e.target.files[0]);
+    const updateCareerImage = await axios.post(`http://localhost:8080/api/updateCareerTitleImage`, formData);
+    if (updateCareerImage) {
+      document.getElementById('careerTitleImage').value = updateCareerImage.data.img
+      document.getElementById('careerTitleImageDisplay').src = `http://localhost:8080/upload/cms/career/${updateCareerImage.data.img}`
     }
-
-    setPickerVisible(false)
-  }
-  const { set, get } = useServicesController({
-    data: {},
-    defaultData: service,
-  })
-
-  const onSubmit = async () => {
-    setErrors([])
-
-    const data = get.data()
-    var inputFields;
-    const userRole = localStorage.getItem('muutos-u-role');
-    if (userRole == 'admin') {
-      inputFields = [
-        "userEmail",
-        "name",
-        "address",
-        "staffWorkers",
-        "userCapacity",
-        "specialists",
-        "spot",
-        "code",
-        "schedule",
-        "price",
-      ]
-    } else {
-      inputFields = [
-        "name",
-        "address",
-        "staffWorkers",
-        "userCapacity",
-        "specialists",
-        "spot",
-        "code",
-        "schedule",
-        "price",
-      ]
-    }
-    const inputEmptyFields = inputFields.filter(
-      f => !data[f] || !data[f].trim()
-    )
-    const inputErrors = []
-
-    if (inputEmptyFields.length) {
-      inputErrors.push(
-        `${inputEmptyFields
-          .map(f => f[0].toUpperCase() + f.slice(1))
-          .join(", ")} cannot be Empty`
-      )
-    }
-    if (data.audiences.length < 1) {
-      inputErrors.push("please select at least one audiences")
-    }
-    if (data.workingHours.length < 1) {
-      inputErrors.push("please select at least one Working Hour")
-    }
-    if (data.facilities.length < 1) {
-      inputErrors.push("please select at least one Facility")
-    }
-    if (data.memberships.length < 1 && component % 2 === 0) {
-      inputErrors.push("please select at least one MemberShip")
-    }
-    if (data.servicesOffered.length < 1 && component % 2 === 1) {
-      inputErrors.push("please select at least one Service")
-    }
-    if (inputErrors.length) {
-      setErrors(inputErrors)
-      window.scrollTo(0, 0)
-      return
-    }
-    setButtonLoading(true)
-
-    let formData = new FormData()
-
-    for (const prop in data) {
-      formData.append(prop, data[prop])
-    }
-
-    const res = await CallPostService(formData)
-    if (res.status === "active") {
-      setActiveComp("products")
-    } else {
-      setErrors([res.data])
-    }
-    setButtonLoading(false)
   }
 
   return (
     <>
-      <ColorPicker onDone={onPickerDone} visible={pickerVisible} />
       <Container>
         <div>
           <TopBar
@@ -180,55 +68,39 @@ export default function Upload({
               "Upload Service": () => { },
             }}
           />
-          <Form onClick={formHandler}>
-           
+          <Form>
+            <input type="hidden" defaultValue={Content.careerTitleImage} name="careerTitleImage" id="careerTitleImage" />
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea2">
               <Form.Label className="text-white">Career Content</Form.Label>
-              <Form.Control className="theme-styling" as="textarea" rows={3} />
+              <Form.Control defaultValue={Content.message} name="message" className="theme-styling" as="textarea" rows={5} />
             </Form.Group>
-            <Form.Group controlId="formFile" className="mb-3">
-              <Form.Label className="text-white">Select Image</Form.Label>
-              <Form.Control className="theme-styling" type="file" />
-            </Form.Group>
+            <br />
+            <Form.Label className="text-white">Select Image</Form.Label>
+            <Form.Control className="theme-styling" type="file" id="career-image" onChange={uploadCareerImage} />
+            <br />
+            <Button type="primary" variant="primary"
+              onClick={() => {
+                var message = document.getElementsByName('message')[0].value;
+                var careerTitleImage = document.getElementsByName('careerTitleImage')[0].value;
 
-            <Button variant="primary">Submit</Button>
+                var data = {
+                  message: message,
+                  careerTitleImage: careerTitleImage,
+                }
+
+                const updateContent = axios.post(`http://localhost:8080/api/updateCareerContent`, data);
+                if (updateContent) {
+                  window.location.reload();
+                }
+              }}
+            >Submit</Button>
           </Form>
           <br></br>
         </div>
-        {
-          () => {
-            if (UserRole !== 'admin') {
-              return (
-                <div>
-                  <Heading
-                    size='32px'
-                    style={{ marginTop: "10px", marginBottom: "37px" }}>
-                    Notice Widgets
-                  </Heading>
-                  {errors.map((error, index) => (
-                    <Alert
-                      key={index}
-                      message={error}
-                      type='error'
-                      showIcon
-                      icon={
-                        <ColorSvg style={{ alignSelf: "start" }} color='assetRed'>
-                          <AlertIcon
-                            style={{
-                              transform: "translateY(4px)",
-                              marginRight: "8px",
-                            }}
-                          />
-                        </ColorSvg>
-                      }
-                    />
-                  ))}
-                </div>
-              )
-
-            }
-          }
-        }
+        <div className="pt-4">
+          <h5 className="text-white">Career Title Image</h5>
+          <img id="careerTitleImageDisplay" src={`http://localhost:8080/upload/cms/career/${Content.careerTitleImage}`} alt="" style={{ width: '100%' }} />
+        </div>
       </Container>
     </>
   )
