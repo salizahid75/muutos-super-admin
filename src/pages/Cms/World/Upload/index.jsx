@@ -134,8 +134,8 @@ export default function Upload({
       document.getElementById('recyclingThreeInitiativeImageDisplay').src = `http://localhost:8080/upload/cms/world/${updateImage.data.img}`
     }
   }
-  // uploadCsvFirstInitiativeImage
-  // uploadRecyclingFirstInitiativeImage
+
+
   return (
     <>
       
