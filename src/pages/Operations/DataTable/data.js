@@ -8,20 +8,23 @@ import SelectDays from "components/SelectDays"
 import axios from "axios"
 export var data;
 async function getOperations() {
-    const getOperation = await axios.post(`http://localhost:8080/api/operations`, { vendorId: localStorage.getItem('uid') });
-    if (getOperation) {
-        var operations = getOperation.data.data;
-        data = [
-            {
-                id: operations.id,
-                operationStatus:operations.operationStatus,
-                workingStatus: operations.workingStatus,
-                businessHours: "9AM to 9PM",    
-                staffWorkers:operations.staffWorkers,
-                userCapacity:operations.userCapacity,
-                specialistForUser:operations.specialistForUser,
-            },
-        ]
+    if (localStorage.getItem('uid')) {
+
+        const getOperation = await axios.post(`http://localhost:8080/api/operations`, { vendorId: localStorage.getItem('uid') ? localStorage.getItem('uid') : '' });
+        if (getOperation) {
+            var operations = getOperation.data.data;
+            data = [
+                {
+                    id: operations.id ? operations.id : '',
+                    operationStatus: operations.operationStatus ? operations.operationStatus : '',
+                    workingStatus: operations.workingStatus ? operations.workingStatus : '',
+                    businessHours: "9AM to 9PM",
+                    staffWorkers: operations.staffWorkers ? operations.staffWorkers : '',
+                    userCapacity: operations.userCapacity ? operations.userCapacity : '',
+                    specialistForUser: operations.specialistForUser ? operations.specialistForUser : '',
+                },
+            ]
+        }
     }
 }
 getOperations();

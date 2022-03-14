@@ -25,7 +25,7 @@ export default function DT({
   active,
   handleDateFilter,
 }) {
-  usePage("Products")
+  usePage("Staff")
   return (
     <Container>
       <div>

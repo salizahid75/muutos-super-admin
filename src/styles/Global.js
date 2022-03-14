@@ -460,5 +460,18 @@ const Global = createGlobalStyle`
     .activity-desk .album a:last-child{
         margin-right: 0px;
     }
+
+    .styled-input{
+    background-color: rgb(34, 34, 37); 
+    font-size: 16px; 
+    color: rgb(250, 250, 250); 
+    font-weight: 400; 
+    padding: 12px 20px; 
+    border: none;
+    border-radius: 5px;
+    &::-webkit-calendar-picker-indicator {
+        background:none;
+        display:none;
+    }
 `
 export default Global

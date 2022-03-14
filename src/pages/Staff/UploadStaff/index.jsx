@@ -76,7 +76,7 @@ export default function UploadProducts({
     for (const image of images) {
       formData.append("image", image.file)
     }
-
+    formData.append('vendorId', localStorage.getItem('uid'));
     if(!isEdit){
 
       const res = await CallPostStaff(formData)

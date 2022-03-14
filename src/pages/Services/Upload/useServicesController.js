@@ -27,7 +27,6 @@ export default function useServicesController({ data: { }, defaultData = null })
             audiences: ([audience, status]) => {
                 if (status) setAudience([...audiences, audience])
                 else setAudience(audiences.filter(a => a !== audience))
-                console.log(audiences)
             },
             servicesOffered: ([serviceOffer, status]) => {
                 if (status)
@@ -36,17 +35,14 @@ export default function useServicesController({ data: { }, defaultData = null })
                     setServicesOffered(
                         servicesOffered.filter(m => m !== serviceOffer)
                     )
-                console.log(servicesOffered)
             },
             memberships: ([membership, status]) => {
                 if (status) setMembership([...memberships, membership])
                 else setMembership(memberships.filter(m => m !== membership))
-                console.log(memberships)
             },
             facilities: ([facility, status]) => {
                 if (status) setFacility([...facilities, facility])
                 else setFacility(facilities.filter(f => f !== facility))
-                console.log(facilities)
             },
             workingHours: ([workingHour, status]) => {
                 if (status) setWorkingHour([...workingHours, workingHour])
