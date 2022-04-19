@@ -61,334 +61,336 @@ export default function Dashboard() {
     return (
         <>
             <Container>
-                <>
-                    <div>
-                        <Grid>
-                            <div className='dashboard-grid__order_contents'>
-                                <Graph>
-                                    <Content>
-                                        {" "}
-                                        <Head>Paid Revenue</Head>
-                                        <Price>QAR 2700</Price>
-                                        <IconWrapper>
-                                            <ColorSvg color='assetTeal'>
-                                                <ArrowUpIcon />{" "}
-                                            </ColorSvg>
-                                            <p style={{ marginRight: "30px" }}>
-                                                <span>2.1%</span> vs Last Day
-                                            </p>{" "}
-                                        </IconWrapper>
-                                    </Content>
-                                </Graph>
-                            </div>
-                            <div className='dashboard-grid__order_contents'>
-                                <Graph>
-                                    <Content>
-                                        {" "}
-                                        <Head>Outstanding Revenue </Head>
-                                        <Price>QAR 405</Price>
-                                        <IconWrapper>
-                                            <ColorSvg color='assetTeal'>
-                                                <ArrowUpIcon />{" "}
-                                            </ColorSvg>
-                                            <p style={{ marginRight: "30px" }}>
-                                                <span>3.1%</span> vs Last Day
-                                            </p>{" "}
-                                        </IconWrapper>
-                                    </Content>
-                                </Graph>
-                            </div>
-                            {/* <div className='dashboard-grid__order_contents'>
-                                <DemandWidget />
-                            </div> */}
-                        </Grid>
-                        <Services>
-                            <BestProducts />
-                            <p style={{ marginRight: "20px" }}></p> <BestService />
-                        </Services>
 
-                        <BarChartWidget />
+            <>
+            <div>
+    <Grid>
+        <div className='dashboard-grid__order_contents'>
+            <Graph>
+                <Content>
+                    {" "}
+                    <Head>Paid Revenue</Head>
+                    <Price>QAR 2700</Price>
+                    <IconWrapper>
+                        <ColorSvg color='assetTeal'>
+                            <ArrowUpIcon />{" "}
+                        </ColorSvg>
+                        <p style={{ marginRight: "30px" }}>
+                            <span>2.1%</span> vs Last Day
+                        </p>{" "}
+                    </IconWrapper>
+                </Content>
+            </Graph>
+        </div>
+        <div className='dashboard-grid__order_contents'>
+            <Graph>
+                <Content>
+                    {" "}
+                    <Head>Outstanding Revenue </Head>
+                    <Price>QAR 405</Price>
+                    <IconWrapper>
+                        <ColorSvg color='assetTeal'>
+                            <ArrowUpIcon />{" "}
+                        </ColorSvg>
+                        <p style={{ marginRight: "30px" }}>
+                            <span>3.1%</span> vs Last Day
+                        </p>{" "}
+                    </IconWrapper>
+                </Content>
+            </Graph>
+        </div>
+        {/* <div className='dashboard-grid__order_contents'>
+<DemandWidget />
+</div> */}
+    </Grid>
+    <Services>
+        <BestProducts />
+        <p style={{ marginRight: "20px" }}></p> <BestService />
+    </Services>
 
-                        <Services>
-                            <WorstProducts />
-                            <p style={{ marginRight: "20px" }}></p> <WorstService />
-                        </Services>
+    <BarChartWidget />
 
-                        <LineChartWidegetAdmin />
-                        <div className="row" style={{ background: '#222225', margin: '0px', borderRadius: '10px', padding: '15px' }}>
-                            <p
-                                style={{
-                                    fontFamily: 'Poppins',
-                                    fontStyle: 'normal',
-                                    fontWeight: 600,
-                                    fontSize: '20px',
-                                    color: '#D4D4D8',
-                                }}
-                            >
-                                Current Discount Campaign
-                            </p>
-                            <div className="col-md-6 p-1 d-flex">
-                                <SubFlex
-                                    style={{
-                                        marginRight: "20px",
-                                    }}
-                                >
-                                    <Flag>
-                                        <ColorSvg color='primary'>
-                                            <PercentIcon style={{ margin: "12px" }} />
-                                        </ColorSvg>
-                                    </Flag>
-                                    <Content>
-                                        {/* <h1>{value.title}</h1> */}
-                                        <h1>Discount Title</h1>
-                                        {/* <p>{value.startingFrom} to {value.endingAt}</p> */}
-                                        <p>20 Aug 2021 to 5 Sept 2021</p>
-                                    </Content>
-                                </SubFlex>
-                                <SubFlex
-                                    style={{
-                                        marginRight: "20px",
-                                    }}>
-                                    <Content>
-                                        <h1
-                                            style={{
-                                                width: "max-content",
-                                            }}>
-                                            Expires In
-                                        </h1>
-                                        {/* <p>{Math.ceil(Math.abs(new Date(value.endingAt) - today) / (1000 * 60 * 60 * 24))} Days</p> */}
-                                        <p>15 Days</p>
-                                    </Content>
-                                </SubFlex>
-                            </div>
-                            <div className="col-md-6 p-1 d-flex">
-                                <SubFlex
-                                    style={{
-                                        marginRight: "20px",
-                                    }}
-                                >
-                                    <Flag>
-                                        <ColorSvg color='primary'>
-                                            <PercentIcon style={{ margin: "12px" }} />
-                                        </ColorSvg>
-                                    </Flag>
-                                    <Content>
-                                        {/* <h1>{value.title}</h1> */}
-                                        <h1>Discount Title</h1>
-                                        {/* <p>{value.startingFrom} to {value.endingAt}</p> */}
-                                        <p>20 Aug 2021 to 5 Sept 2021</p>
-                                    </Content>
-                                </SubFlex>
-                                <SubFlex
-                                    style={{
-                                        marginRight: "20px",
-                                    }}>
-                                    <Content>
-                                        <h1
-                                            style={{
-                                                width: "max-content",
-                                            }}>
-                                            Expires In
-                                        </h1>
-                                        {/* <p>{Math.ceil(Math.abs(new Date(value.endingAt) - today) / (1000 * 60 * 60 * 24))} Days</p> */}
-                                        <p>15 Days</p>
-                                    </Content>
-                                </SubFlex>
-                            </div>
-                            <div className="col-md-6 p-1 d-flex">
-                                <SubFlex
-                                    style={{
-                                        marginRight: "20px",
-                                    }}
-                                >
-                                    <Flag>
-                                        <ColorSvg color='primary'>
-                                            <PercentIcon style={{ margin: "12px" }} />
-                                        </ColorSvg>
-                                    </Flag>
-                                    <Content>
-                                        {/* <h1>{value.title}</h1> */}
-                                        <h1>Discount Title</h1>
-                                        {/* <p>{value.startingFrom} to {value.endingAt}</p> */}
-                                        <p>20 Aug 2021 to 5 Sept 2021</p>
-                                    </Content>
-                                </SubFlex>
-                                <SubFlex
-                                    style={{
-                                        marginRight: "20px",
-                                    }}>
-                                    <Content>
-                                        <h1
-                                            style={{
-                                                width: "max-content",
-                                            }}>
-                                            Expires In
-                                        </h1>
-                                        {/* <p>{Math.ceil(Math.abs(new Date(value.endingAt) - today) / (1000 * 60 * 60 * 24))} Days</p> */}
-                                        <p>15 Days</p>
-                                    </Content>
-                                </SubFlex>
-                            </div>
-                            <div className="col-md-6 p-1 d-flex">
-                                <SubFlex
-                                    style={{
-                                        marginRight: "20px",
-                                    }}
-                                >
-                                    <Flag>
-                                        <ColorSvg color='primary'>
-                                            <PercentIcon style={{ margin: "12px" }} />
-                                        </ColorSvg>
-                                    </Flag>
-                                    <Content>
-                                        {/* <h1>{value.title}</h1> */}
-                                        <h1>Discount Title</h1>
-                                        {/* <p>{value.startingFrom} to {value.endingAt}</p> */}
-                                        <p>20 Aug 2021 to 5 Sept 2021</p>
-                                    </Content>
-                                </SubFlex>
-                                <SubFlex
-                                    style={{
-                                        marginRight: "20px",
-                                    }}>
-                                    <Content>
-                                        <h1
-                                            style={{
-                                                width: "max-content",
-                                            }}>
-                                            Expires In
-                                        </h1>
-                                        {/* <p>{Math.ceil(Math.abs(new Date(value.endingAt) - today) / (1000 * 60 * 60 * 24))} Days</p> */}
-                                        <p>15 Days</p>
-                                    </Content>
-                                </SubFlex>
-                            </div>
-                            <div className="col-md-6 p-1 d-flex">
-                                <SubFlex
-                                    style={{
-                                        marginRight: "20px",
-                                    }}
-                                >
-                                    <Flag>
-                                        <ColorSvg color='primary'>
-                                            <PercentIcon style={{ margin: "12px" }} />
-                                        </ColorSvg>
-                                    </Flag>
-                                    <Content>
-                                        {/* <h1>{value.title}</h1> */}
-                                        <h1>Discount Title</h1>
-                                        {/* <p>{value.startingFrom} to {value.endingAt}</p> */}
-                                        <p>20 Aug 2021 to 5 Sept 2021</p>
-                                    </Content>
-                                </SubFlex>
-                                <SubFlex
-                                    style={{
-                                        marginRight: "20px",
-                                    }}>
-                                    <Content>
-                                        <h1
-                                            style={{
-                                                width: "max-content",
-                                            }}>
-                                            Expires In
-                                        </h1>
-                                        {/* <p>{Math.ceil(Math.abs(new Date(value.endingAt) - today) / (1000 * 60 * 60 * 24))} Days</p> */}
-                                        <p>15 Days</p>
-                                    </Content>
-                                </SubFlex>
-                            </div>
-                            <div className="col-md-6 p-1 d-flex">
-                                <SubFlex
-                                    style={{
-                                        marginRight: "20px",
-                                    }}
-                                >
-                                    <Flag>
-                                        <ColorSvg color='primary'>
-                                            <PercentIcon style={{ margin: "12px" }} />
-                                        </ColorSvg>
-                                    </Flag>
-                                    <Content>
-                                        {/* <h1>{value.title}</h1> */}
-                                        <h1>Discount Title</h1>
-                                        {/* <p>{value.startingFrom} to {value.endingAt}</p> */}
-                                        <p>20 Aug 2021 to 5 Sept 2021</p>
-                                    </Content>
-                                </SubFlex>
-                                <SubFlex
-                                    style={{
-                                        marginRight: "20px",
-                                    }}>
-                                    <Content>
-                                        <h1
-                                            style={{
-                                                width: "max-content",
-                                            }}>
-                                            Expires In
-                                        </h1>
-                                        {/* <p>{Math.ceil(Math.abs(new Date(value.endingAt) - today) / (1000 * 60 * 60 * 24))} Days</p> */}
-                                        <p>15 Days</p>
-                                    </Content>
-                                </SubFlex>
-                            </div>
-                        </div>
-                        <br />
-                        
-                    </div>
+    <Services>
+        <WorstProducts />
+        <p style={{ marginRight: "20px" }}></p> <WorstService />
+    </Services>
 
-                    <div>
-                        <Heading
-                            size='32px'
-                            style={{ marginTop: "10px", marginBottom: "37px" }}>
-                            Activity Widgets
-                        </Heading>
-                        <ProductSold />
-                        <Grid style={{ display: 'block', width: '100%'}}>
-                            <div className='dashboard-grid__order_contents'>
-                                <Graph>
-                                    <Content1>
-                                        {" "}
-                                        <Head>Approved Products</Head>
-                                        <Price>650</Price>s
-                                    </Content1>{" "}
-                                </Graph>
-                            </div>
-                        </Grid>
-                        <Grid style={{ display: 'block', width: '100%'}}>
-                            <div className='dashboard-grid__order_contents'>
-                                <Graph>
-                                    <Content1>
-                                        {" "}
-                                        <Head>Pending Products</Head>
-                                        <Price>652</Price>
-                                    </Content1>{" "}
-                                </Graph>
-                            </div>
-                        </Grid>
-                        <Grid style={{ display: 'block', width: '100%'}}>
-                            <div className='dashboard-grid__order_contents'>
-                                <Graph>
-                                    <Content1>
-                                        {" "}
-                                        <Head>Approved Services</Head>
-                                        <Price>650</Price>
-                                    </Content1>{" "}
-                                </Graph>
-                            </div>
-                        </Grid>
-                        <Grid style={{ display: 'block', width: '100%'}}>
-                            <div className='dashboard-grid__order_contents'>
-                                <Graph>
-                                    <Content1>
-                                        {" "}
-                                        <Head>Pending Services</Head>
-                                        <Price>652</Price>
-                                    </Content1>{" "}
-                                </Graph>
-                            </div>
-                        </Grid>
-                    </div>
+    <LineChartWidegetAdmin />
+    <div className="row" style={{ background: '#222225', margin: '0px', borderRadius: '10px', padding: '15px' }}>
+        <p
+            style={{
+                fontFamily: 'Poppins',
+                fontStyle: 'normal',
+                fontWeight: 600,
+                fontSize: '20px',
+                color: '#D4D4D8',
+            }}
+        >
+            Current Discount Campaign
+        </p>
+        <div className="col-md-6 p-1 d-flex">
+            <SubFlex
+                style={{
+                    marginRight: "20px",
+                }}
+            >
+                <Flag>
+                    <ColorSvg color='primary'>
+                        <PercentIcon style={{ margin: "12px" }} />
+                    </ColorSvg>
+                </Flag>
+                <Content>
+                    {/* <h1>{value.title}</h1> */}
+                    <h1>Discount Title</h1>
+                    {/* <p>{value.startingFrom} to {value.endingAt}</p> */}
+                    <p>20 Aug 2021 to 5 Sept 2021</p>
+                </Content>
+            </SubFlex>
+            <SubFlex
+                style={{
+                    marginRight: "20px",
+                }}>
+                <Content>
+                    <h1
+                        style={{
+                            width: "max-content",
+                        }}>
+                        Expires In
+                    </h1>
+                    {/* <p>{Math.ceil(Math.abs(new Date(value.endingAt) - today) / (1000 * 60 * 60 * 24))} Days</p> */}
+                    <p>15 Days</p>
+                </Content>
+            </SubFlex>
+        </div>
+        <div className="col-md-6 p-1 d-flex">
+            <SubFlex
+                style={{
+                    marginRight: "20px",
+                }}
+            >
+                <Flag>
+                    <ColorSvg color='primary'>
+                        <PercentIcon style={{ margin: "12px" }} />
+                    </ColorSvg>
+                </Flag>
+                <Content>
+                    {/* <h1>{value.title}</h1> */}
+                    <h1>Discount Title</h1>
+                    {/* <p>{value.startingFrom} to {value.endingAt}</p> */}
+                    <p>20 Aug 2021 to 5 Sept 2021</p>
+                </Content>
+            </SubFlex>
+            <SubFlex
+                style={{
+                    marginRight: "20px",
+                }}>
+                <Content>
+                    <h1
+                        style={{
+                            width: "max-content",
+                        }}>
+                        Expires In
+                    </h1>
+                    {/* <p>{Math.ceil(Math.abs(new Date(value.endingAt) - today) / (1000 * 60 * 60 * 24))} Days</p> */}
+                    <p>15 Days</p>
+                </Content>
+            </SubFlex>
+        </div>
+        <div className="col-md-6 p-1 d-flex">
+            <SubFlex
+                style={{
+                    marginRight: "20px",
+                }}
+            >
+                <Flag>
+                    <ColorSvg color='primary'>
+                        <PercentIcon style={{ margin: "12px" }} />
+                    </ColorSvg>
+                </Flag>
+                <Content>
+                    {/* <h1>{value.title}</h1> */}
+                    <h1>Discount Title</h1>
+                    {/* <p>{value.startingFrom} to {value.endingAt}</p> */}
+                    <p>20 Aug 2021 to 5 Sept 2021</p>
+                </Content>
+            </SubFlex>
+            <SubFlex
+                style={{
+                    marginRight: "20px",
+                }}>
+                <Content>
+                    <h1
+                        style={{
+                            width: "max-content",
+                        }}>
+                        Expires In
+                    </h1>
+                    {/* <p>{Math.ceil(Math.abs(new Date(value.endingAt) - today) / (1000 * 60 * 60 * 24))} Days</p> */}
+                    <p>15 Days</p>
+                </Content>
+            </SubFlex>
+        </div>
+        <div className="col-md-6 p-1 d-flex">
+            <SubFlex
+                style={{
+                    marginRight: "20px",
+                }}
+            >
+                <Flag>
+                    <ColorSvg color='primary'>
+                        <PercentIcon style={{ margin: "12px" }} />
+                    </ColorSvg>
+                </Flag>
+                <Content>
+                    {/* <h1>{value.title}</h1> */}
+                    <h1>Discount Title</h1>
+                    {/* <p>{value.startingFrom} to {value.endingAt}</p> */}
+                    <p>20 Aug 2021 to 5 Sept 2021</p>
+                </Content>
+            </SubFlex>
+            <SubFlex
+                style={{
+                    marginRight: "20px",
+                }}>
+                <Content>
+                    <h1
+                        style={{
+                            width: "max-content",
+                        }}>
+                        Expires In
+                    </h1>
+                    {/* <p>{Math.ceil(Math.abs(new Date(value.endingAt) - today) / (1000 * 60 * 60 * 24))} Days</p> */}
+                    <p>15 Days</p>
+                </Content>
+            </SubFlex>
+        </div>
+        <div className="col-md-6 p-1 d-flex">
+            <SubFlex
+                style={{
+                    marginRight: "20px",
+                }}
+            >
+                <Flag>
+                    <ColorSvg color='primary'>
+                        <PercentIcon style={{ margin: "12px" }} />
+                    </ColorSvg>
+                </Flag>
+                <Content>
+                    {/* <h1>{value.title}</h1> */}
+                    <h1>Discount Title</h1>
+                    {/* <p>{value.startingFrom} to {value.endingAt}</p> */}
+                    <p>20 Aug 2021 to 5 Sept 2021</p>
+                </Content>
+            </SubFlex>
+            <SubFlex
+                style={{
+                    marginRight: "20px",
+                }}>
+                <Content>
+                    <h1
+                        style={{
+                            width: "max-content",
+                        }}>
+                        Expires In
+                    </h1>
+                    {/* <p>{Math.ceil(Math.abs(new Date(value.endingAt) - today) / (1000 * 60 * 60 * 24))} Days</p> */}
+                    <p>15 Days</p>
+                </Content>
+            </SubFlex>
+        </div>
+        <div className="col-md-6 p-1 d-flex">
+            <SubFlex
+                style={{
+                    marginRight: "20px",
+                }}
+            >
+                <Flag>
+                    <ColorSvg color='primary'>
+                        <PercentIcon style={{ margin: "12px" }} />
+                    </ColorSvg>
+                </Flag>
+                <Content>
+                    {/* <h1>{value.title}</h1> */}
+                    <h1>Discount Title</h1>
+                    {/* <p>{value.startingFrom} to {value.endingAt}</p> */}
+                    <p>20 Aug 2021 to 5 Sept 2021</p>
+                </Content>
+            </SubFlex>
+            <SubFlex
+                style={{
+                    marginRight: "20px",
+                }}>
+                <Content>
+                    <h1
+                        style={{
+                            width: "max-content",
+                        }}>
+                        Expires In
+                    </h1>
+                    {/* <p>{Math.ceil(Math.abs(new Date(value.endingAt) - today) / (1000 * 60 * 60 * 24))} Days</p> */}
+                    <p>15 Days</p>
+                </Content>
+            </SubFlex>
+        </div>
+    </div>
+    <br />
+
+</div>
+
+<div>
+    <Heading
+        size='32px'
+        style={{ marginTop: "10px", marginBottom: "37px" }}>
+        Activity Widgets
+    </Heading>
+    <ProductSold />
+    <Grid style={{ display: 'block', width: '100%' }}>
+        <div className='dashboard-grid__order_contents'>
+            <Graph>
+                <Content1>
+                    {" "}
+                    <Head>Approved Products</Head>
+                    <Price>650</Price>s
+                </Content1>{" "}
+            </Graph>
+        </div>
+    </Grid>
+    <Grid style={{ display: 'block', width: '100%' }}>
+        <div className='dashboard-grid__order_contents'>
+            <Graph>
+                <Content1>
+                    {" "}
+                    <Head>Pending Products</Head>
+                    <Price>652</Price>
+                </Content1>{" "}
+            </Graph>
+        </div>
+    </Grid>
+    <Grid style={{ display: 'block', width: '100%' }}>
+        <div className='dashboard-grid__order_contents'>
+            <Graph>
+                <Content1>
+                    {" "}
+                    <Head>Approved Services</Head>
+                    <Price>650</Price>
+                </Content1>{" "}
+            </Graph>
+        </div>
+    </Grid>
+    <Grid style={{ display: 'block', width: '100%' }}>
+        <div className='dashboard-grid__order_contents'>
+            <Graph>
+                <Content1>
+                    {" "}
+                    <Head>Pending Services</Head>
+                    <Price>652</Price>
+                </Content1>{" "}
+            </Graph>
+        </div>
+    </Grid>
+</div>
                 </>
+
             </Container>
         </>
     )

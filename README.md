@@ -68,3 +68,38 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+Running Super Admin / Vendor 
+1. open terminal 
+2. cd frontend
+3. npm start
+
+Running Backend Server
+1. open terminal ctrl+shift+`
+2. cd backend
+3. npm run dev
+
+Running Website 
+1. open terminal ctrl+shift+`
+2. cd muutos-site-home
+3. npm run dev
+
+You cannot serve two projects on same port so i'm killing super admin / vendor server now i'll again run the website server. if you start the website server first then vendor there will be no issue.
+
+Website is running
+APIs are running 
+Dashboard is running
+
+Admin Email & Password 
+Email: syed.ali@gmail.com
+Password: mosestech
+
+Vendor Email & Password 
+Email: syed.ali@mosestechnologies.org
+Password: mosestech
+
+Admin Login 
+http://localhost:3001/admin
+
+Okay Sir !
